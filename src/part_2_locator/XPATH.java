@@ -133,7 +133,7 @@ public class XPATH{
         driver.findElement(By.xpath("//input[@id='txtPhone']")).sendKeys("113645067281");
         driver.findElement(By.xpath("//button[@class='btn_pink_sm fs16']")).click();
         String txtPhoneerror =driver.findElement(By.xpath("//label[@id='txtPhone-error']")).getText();
-        Assert.assertEquals(txtPhoneerror, "Số điện thoại bắt đầu bằng: 09 - 03 - 012 - 016 - 018 - 019 - 088 - 03 - 05 - 07 - 08");
+        h.assertEquals(txtPhoneerror, "Số điện thoại bắt đầu bằng: 09 - 03 - 012 - 016 - 018 - 019 - 088 - 03 - 05 - 07 - 08");
     }
     @Test
     public  void  TC_07(){

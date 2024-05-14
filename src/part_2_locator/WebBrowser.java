@@ -21,6 +21,7 @@ public class WebBrowser {
     By Under18=By.cssSelector("#under_18");
     By edu=By.cssSelector("#edu");
     By user5=By.xpath("//h5[text() = 'Name: User5']");
+    By Ed =By.xpath("//div[@class='container']//label[text()='Education:']");
 
 
 
@@ -39,6 +40,7 @@ public class WebBrowser {
         // driver.get("https://demo.nopcommerce.com/register");
     }
     @Test public void TC01_Displayed(){
+        //Truy cap vao trang
         driver.get("https://automationfc.github.io/basic-form/index.html");
         // Check email textbox
         if (driver.findElement(emailTextbox).isDisplayed()){
@@ -63,6 +65,13 @@ public class WebBrowser {
             System.out.println("Name: User5 is Displayed");
         else {
             System.out.println("Name: User5 is not Displayed");
+        }
+        if (driver.findElement(Ed).isDisplayed())
+        {
+            System.out.println("Ed: Education is Displayed");
+        }
+        else {
+            System.out.println("Ed: Education is not Displayed");
         }
     }
 

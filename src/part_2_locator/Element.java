@@ -77,6 +77,9 @@ public class Element {
         driver.findElement(CreatBCA).click();
         Assert.assertTrue(driver.getPageSource().contains("Create an Account"));
     }
+//ELEMENT
+
+
     @Test public void Register(){
         driver.get("https://demo.guru99.com/");
         driver.findElement(By.xpath("//input[@name='emailid']")).sendKeys("ptphuong.hnue@gmail.com");
