@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
@@ -20,6 +21,11 @@ public class Element {
     By myAcc = By.xpath("//div[@class='footer']//a[text()='My Account']");
      By CreatBCA =By.xpath("//div[@class='col2-set']//span[text()='Create an Account']");
     String username, pass;
+    String fistname= "Automation";
+    String lastName = "FC";
+    String emailAddress=getmaillAddress();
+    String password= "123456789";
+    String fullname =fistname + " " + lastName;
     @BeforeClass
     public void BeforeClass(){
         System.out.println(System.getProperty("os.name"));
@@ -97,5 +103,53 @@ public class Element {
         driver.findElement(By.xpath("//input[@name='btnLogin']")).click();
 
     }
+    @Test public  void Login_05_Succes(){
+
+
+        //VERIFY
+        Assert.assertEquals(driver.findElement(By.cssSelector("LI.success-msg")).getText(),"Thank you for registering with Main Website Store.");
+        //div.welcome-msg strong
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.welcome-msg strong")).getText(),"Hello," +fullname +"!");
+        String contactInfo=driver.findElement(By.xpath("//h3[text()='Contact Information']/parent::div//following-sibling::div/p")).getText();
+        Assert.assertTrue(contactInfo.contains(fullname));
+        Assert.assertTrue(contactInfo.contains(emailAddress));
+
+        //logout
+        driver.findElement(By.cssSelector("a.skip-account")).click();
+        driver.findElement(By.cssSelector("a[title='Log Out']")).click();
+
+        //login
+
+        driver.get("http://live.techpanda.org/");
+        driver.findElement(By.xpath(String.valueOf(myAcc))).click();
+        driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
+        driver.findElement(By.cssSelector("input#firstname")).sendKeys(fistname);
+        // driver.findElement(By.cssSelector("input#middlename")).sendKeys("");
+        driver.findElement(By.cssSelector("input#lastname")).sendKeys(lastName);
+        driver.findElement(By.cssSelector("input#email_address")).sendKeys(emailAddress);
+        driver.findElement(By.cssSelector("input#password")).sendKeys(password);
+        driver.findElement(By.cssSelector("input#confirmation")).sendKeys(password);
+        driver.findElement(By.xpath("//button[@title='Register']")).click();
+
+
+        //Verify acc
+        driver.findElement(By.xpath("//a[text()='Account Information']")).click();
+        driver.findElement(By.cssSelector("input#firstname")).getAttribute("value");
+        Assert.assertEquals(driver.findElement(By.cssSelector("input#firstname")).getAttribute("value"),fistname);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input#lastname")).getAttribute("value"),lastName);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input#email_address")).getAttribute("value"),emailAddress);
+
+        driver.findElement(By.xpath("//div[@id='header-nav']//following-sibling::li[@class='level0 nav-1 first']/a[text()='Mobile']")).click();
+
+
+    }
+    public  String getmaillAddress(){
+        Random rand = new Random();
+        //rand.nextInt(99999);
+        String emailAddress ="automation" + rand.nextInt(999999) + "@gmail.net";
+        return  emailAddress;
+        // return "automation" + rand.nextInt(999999) + "@gmail.net"
+    }
+
 //
 }

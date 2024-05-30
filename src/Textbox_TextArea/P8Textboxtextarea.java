@@ -7,12 +7,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.sql.Driver;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
-public class P8_Textbox_TextArea {
+public class P8Textboxtextarea {
     String osName= System.getProperty("os.name");
     String projectPath =System.getProperty("user.dir");
     WebDriver driver;

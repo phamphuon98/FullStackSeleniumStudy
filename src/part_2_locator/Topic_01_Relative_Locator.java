@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Topic_01_Relative_Locator {
@@ -60,8 +61,8 @@ public class Topic_01_Relative_Locator {
         System.out.println(rememberMeTextElement.getText());
         List<WebElement> allLinks = driver.findElements(RelativeLocator.with(By.tagName("a")));
         System.out.println(allLinks.size());
-    }
 
+    }
 
     @AfterClass
     public void afterClass() {

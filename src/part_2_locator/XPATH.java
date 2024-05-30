@@ -133,7 +133,7 @@ public class XPATH{
         driver.findElement(By.xpath("//input[@id='txtPhone']")).sendKeys("113645067281");
         driver.findElement(By.xpath("//button[@class='btn_pink_sm fs16']")).click();
         String txtPhoneerror =driver.findElement(By.xpath("//label[@id='txtPhone-error']")).getText();
-        h.assertEquals(txtPhoneerror, "Số điện thoại bắt đầu bằng: 09 - 03 - 012 - 016 - 018 - 019 - 088 - 03 - 05 - 07 - 08");
+         Assert.assertEquals(txtPhoneerror, "Số điện thoại bắt đầu bằng: 09 - 03 - 012 - 016 - 018 - 019 - 088 - 03 - 05 - 07 - 08");
     }
     @Test
     public  void  TC_07(){
@@ -142,10 +142,14 @@ public class XPATH{
         //truỳen text va locator để hiển thị
         driver.findElement(By.xpath("//h1[text()='Selenium WebDriver API']")).isDisplayed();
     }
-    @Test public  void TC_08(){
-       String nestedText =driver.findElement(By.xpath("//h5[@id='nested']")).getText();
-       System.out.println(nestedText);
-    };
+
+//    @Test public  void TC_08(){
+//       String nestedText =driver.findElement(By.xpath("//h5[@id='nested']")).getText();
+//       System.out.println(nestedText);
+//       driver.findElement(By.id("form#form-validate input#firstname"));
+//       driver.findElement(By.id()).getCssValue("background-color");
+//    };
+
 
     //driver.findElement(By.id("FirstName")).sendKeys("abchfs s");
 //    @AfterClass
