@@ -1,4 +1,4 @@
-package part_2_locator;
+package selenium;
 
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;

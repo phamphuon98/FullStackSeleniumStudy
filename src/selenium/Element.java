@@ -1,4 +1,4 @@
-package part_2_locator;
+package selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

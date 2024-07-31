@@ -1,15 +1,9 @@
-package part_2_locator;
+package selenium;
 
 import java.time.Duration;
-import java.util.List;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

@@ -1,4 +1,4 @@
-package part_2_locator;
+package selenium;
 import java.time.Duration;
 import  org.openqa.selenium.Alert;
 import org.openqa.selenium.By;

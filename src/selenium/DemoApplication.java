@@ -1,9 +1,5 @@
-package part_2_locator;
+package selenium;
 
-import java.security.*;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.Base64;
 import java.util.Scanner;
 
 public class DemoApplication {

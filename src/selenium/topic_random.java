@@ -1,4 +1,4 @@
-package part_2_locator;
+package selenium;
 
 import java.util.Random;
 
