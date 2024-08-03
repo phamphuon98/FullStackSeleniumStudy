@@ -1,6 +1,9 @@
 package selenium;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,12 +13,14 @@ import org.testng.annotations.Test;
 
 public class Topic_Popup {
     WebDriver driver;
+    String emailAddress = "testdemo" + getRandomNumber() + "@gmail.com";
 
     @BeforeClass
     public void befoclass() {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+
     }
 
     @Test
@@ -45,7 +50,7 @@ public class Topic_Popup {
     @Test
     public void FixedPopupinDOM_02() {
         driver.get("https://skills.kynaenglish.vn/dang-nhap");
-        sleepInSecond(2);
+        sleepInSecond(5);
         //driver.findElement(By.cssSelector("button.login_ ")).click();
         Assert.assertTrue(driver.findElement(By.cssSelector("div[id='k-popup-account-login'][style] div[class='k-popup-account-mb-content']"))
                 .isDisplayed());
@@ -88,16 +93,116 @@ public class Topic_Popup {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Assert.assertEquals(driver.findElements(By.cssSelector("div.ReactModal__Content")).size(), 0);
     }
+
     @Test
-    public void FixedPopupNotinDOM_04(){
+    public void FixedPopupNotinDOM_04() {
         driver.get("https://www.facebook.com/");
+        driver.findElement(By.xpath("//a[@data-testid='open-registration-form-button']"))
+                .click();
+        sleepInSecond(2);
+        Assert.assertTrue(driver.findElement(
+                        By.xpath("//div[text()='Đăng ký']/parent::div/parent::div"))
+                .isDisplayed());
+        driver.findElement(By.xpath("//div[text()='Đăng ký']/parent::div/preceding-sibling::img"))
+                .click();
+        sleepInSecond(2);
+        Assert.assertEquals(driver.findElements(
+                        By.xpath("//div[text()='Đăng ký']/parent::div/parent::div"))
+                .size(), 0);
     }
+
+    @Test
+    public void TC_05_RandomPopupNotInDom() {
+        driver.get("https://www.javacodegeeks.com/");
+        sleepInSecond(5);
+
+
+        By NewletterPopup = By.cssSelector("div.lepopup-popup-container > div:not([style^='display:none'])");
+        sleepInSecond(2);
+        if (driver.findElement(NewletterPopup).isDisplayed()) {
+            driver.findElement(By.cssSelector("div.lepopup-element-23 div.lepopup-element-html-content>a")).click();
+        } else {
+            driver.findElement(By.cssSelector("div.lepopup-input input[name='lepopup-12']"))
+                    .sendKeys("Agile Testing Explained");
+            sleepInSecond(2);
+            driver.findElement(By.cssSelector("div[data-type='button'] a")).click();
+            Assert.assertEquals(driver.findElement(
+                            By.xpath("//span[text()='Invalid email address.']"))
+                    .getText(), "Invalid email address");
+        }
+
+    }
+
+    @Test
+    public void TC_06_Random_Popup_In_DOM() {
+        driver.get("https://www.javacodegeeks.com/");
+        sleepInSecond(15);
+//
+
+        By lePopup = By.cssSelector("div.lepopup-popup-container > div:not([style^='display:none'])");
+
+        //List<WebElement> popups = driver.findElements(lePopup);
+        WebElement popup = null;
+        try {
+            popup = driver.findElement(lePopup);
+        } catch (Exception ex) {
+            System.out.println("Not found Element");
+        }
+//        boolean isDisplayPopup = popups.stream().anyMatch(WebElement::isDisplayed);
+        if (popup != null && popup.isDisplayed()) {
+            List<WebElement> buttonExits = driver.findElements(By.cssSelector("div.lepopup-form[data-title='Newsletter-Books Anime Brief - NEW']>div.lepopup-form-inner>div>div>a[onclick='return lepopup_close();']"));
+            for (WebElement button : buttonExits) {
+                if (button.isDisplayed()) {
+                    button.click();
+
+                }
+            }
+        }
+
+        String articleName = "Agile Testing Explained";
+
+        driver.findElement(By.cssSelector("input#search-input")).sendKeys(articleName);
+        sleepInSecond(3);
+        WebElement button = driver.findElement(By.id("search-submit"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        sleepInSecond(15);
+
+        Assert.assertEquals(driver.findElement(By.cssSelector("ul#posts-container>li:first-child h2 a")).getText(),
+                articleName);
+//
+//
+//        if (driver.findElement(lePopup).isDisplayed()) {
+//
+//            // input email address
+//            driver.findElement(By.cssSelector("div.lepopup-input>input")).sendKeys(emailAddress);
+////            driver.findElement(
+////                            By.xpath("//div[@class='lepopup-element lepopup-element-13']//div/div/div[@class='lepopup-cr-box']/label"))
+////                    .click();
+//            WebElement label = driver.findElement(By.xpath("//div[@class='lepopup-element lepopup-element-13']//div/div/div[@class='lepopup-cr-box']/label"));
+//            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", label);
+//            driver.findElement(By.cssSelector("div[data-type='button'] a")).click();
+//            sleepInSecond(10);
+//
+////
+//            Assert.assertTrue(driver.findElement(By.cssSelector("div.lepopup-element-html-content>p")).getText()
+//                    .contains("Your sign-up request was successful. We will contact you shortly. Please "));
+//
+//            sleepInSecond(15);
+//        }
+
+
+    }
+
+    public int getRandomNumber() {
+        return new Random().nextInt(9999);
+    }
+
     public void sleepInSecond(long timeInSecond) {
         try {
-            Thread.sleep(timeInSecond * 1000L);
-        } catch (InterruptedException var4) {
-            InterruptedException e = var4;
+            Thread.sleep(timeInSecond * 1000);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
