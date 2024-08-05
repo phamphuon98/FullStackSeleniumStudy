@@ -113,23 +113,27 @@ public class Topic_Popup {
 
     @Test
     public void TC_05_RandomPopupNotInDom() {
-        driver.get("https://www.javacodegeeks.com/");
-        sleepInSecond(5);
-
-
-        By NewletterPopup = By.cssSelector("div.lepopup-popup-container > div:not([style^='display:none'])");
-        sleepInSecond(2);
-        if (driver.findElement(NewletterPopup).isDisplayed()) {
-            driver.findElement(By.cssSelector("div.lepopup-element-23 div.lepopup-element-html-content>a")).click();
-        } else {
-            driver.findElement(By.cssSelector("div.lepopup-input input[name='lepopup-12']"))
-                    .sendKeys("Agile Testing Explained");
+        driver.get("https://dehieu.vn/");
+        sleepInSecond(15);
+        By MarketingPopup = By.cssSelector("div#modalPopupForm div.modal-dialog");
+        if (driver.findElements(MarketingPopup).size() > 0 &&
+                driver.findElements(MarketingPopup)
+                        .get(0).isDisplayed()) {
+            System.out.println(" Popup hien thi");
+            int HeightBrower = driver.manage().window().getSize().getHeight();
+            System.out.println("do phan giai: " + HeightBrower);
             sleepInSecond(2);
-            driver.findElement(By.cssSelector("div[data-type='button'] a")).click();
-            Assert.assertEquals(driver.findElement(
-                            By.xpath("//span[text()='Invalid email address.']"))
-                    .getText(), "Invalid email address");
+            if (HeightBrower < 1920 ){
+                ((JavascriptExecutor)driver).executeScript("arguments[0].click();",
+                        driver.findElement(By.cssSelector("button.close")));
+            }
+            else {
+                driver.findElement(By.cssSelector("button#btn-close")).click();
+            }
+            sleepInSecond(5);
+
         }
+
 
     }
 
