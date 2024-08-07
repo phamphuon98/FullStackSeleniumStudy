@@ -117,10 +117,6 @@ public class topic_17_Action {
                 .toLowerCase(),"#03a9f4");
 
     }
-    @Test public  void TC_07_DragAndDropHTML5()throws InterruptedException{
-
-        
-    }
 
 
 
