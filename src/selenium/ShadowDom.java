@@ -29,14 +29,14 @@ public class ShadowDom {
     @Test public  void TC01_shadowDom() {
         driver.get("https://automationfc.github.io/shadow-dom");
          sleepInSecond(5);
-         WebElement shadowDom = driver.findElement(By.cssSelector("div#non_host"));
+         WebElement shadowDom = driver.findElement(By.cssSelector("div#shadow_host"));
          SearchContext ShadowrootContext = shadowDom.getShadowRoot();
          String sometext =ShadowrootContext
-                 .findElement(By.cssSelector("span#shadow_content"))
+                 .findElement(By.cssSelector("span#shadow_content>span"))
                  .getText();
          System.out.println(sometext);
          Assert.assertEquals(sometext,"some text");
-         WebElement checkboxShedow = driver.findElement(By.cssSelector("input[type='checkbox']"));
+         WebElement checkboxShedow = ShadowrootContext.findElement(By.cssSelector("input[type='checkbox']"));
          Assert.assertFalse(checkboxShedow.isSelected());
          List <WebElement> AllIpnut = driver.findElements(By.cssSelector("input[type='checkbox']"));
          System.out.println(AllIpnut.size());
