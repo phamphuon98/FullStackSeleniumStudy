@@ -21,7 +21,7 @@ public class Frame_iframe {
     }
 
     @Test
-    public void TC_01_() {
+    public void TC_01_iframe() {
         driver.get("https://www.formsite.com/templates/education/campus-safety-survey/");
         driver.findElement(By.cssSelector("div#imageTemplateContainer img")).click();
         sleepInSecond(5);
@@ -39,7 +39,19 @@ public class Frame_iframe {
                 .selectByVisibleText("Senior");
         new Select(driver.findElement(By.cssSelector("select#RESULT_RadioButton-3")))
                 .selectByVisibleText("North Dorm");
-
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+                driver.findElement(By.xpath("//input[@id='RESULT_RadioButton-4_1']/following-sibling::label[text()='Female']")));
+        driver.findElement(By.cssSelector("input.submit_button")).click();
+        sleepInSecond(5);
+        driver.switchTo().defaultContent();
+        sleepInSecond(3);
+        driver.findElement(By.cssSelector("nav.header--desktop-floater a.menu-item-login")).click();
+        sleepInSecond(2);
+        driver.findElement(By.cssSelector("button#login")).click();
+        sleepInSecond(2);
+        Assert.assertEquals(driver.findElement(
+                By.xpath("//div[text()='Username and password are both required.']")).getText()
+                ,"Username and password are both required.");
 
     }
 

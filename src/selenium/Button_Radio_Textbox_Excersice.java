@@ -1,4 +1,5 @@
 package selenium;
+
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 public class Button_Radio_Textbox_Excersice {
     WebDriver driver;
     Alert alert;
@@ -29,7 +31,7 @@ public class Button_Radio_Textbox_Excersice {
 
     @BeforeClass
     public void beforeClass() {
-       keys= osName.contains("Windows") ? Keys.CONTROL:Keys.COMMAND;
+        keys = osName.contains("Windows") ? Keys.CONTROL : Keys.COMMAND;
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -160,7 +162,6 @@ public class Button_Radio_Textbox_Excersice {
 
     @Test
     public void TC_06_Authentiaction_Alert_II() throws IOException {
-
         driver.get("http://the-internet.herokuapp.com/basic_auth");
     }
 

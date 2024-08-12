@@ -16,11 +16,7 @@ public class textbox {
     public void beforeClass() {
         System.out.println(System.getProperty("os.name"));
         System.out.println(System.getProperty("os.version"));
-        if (osName.contains("Windows")) {
-            System.setProperty("webdriver.gecko.driver", projectPath + "\\browerDriver\\geckodriver.exe");
-        } else {
-            System.setProperty("webdriver.gecko.driver", projectPath + "/browerDriver/geckodriver");
-        }
+
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(90));
         driver.manage().window().maximize();
