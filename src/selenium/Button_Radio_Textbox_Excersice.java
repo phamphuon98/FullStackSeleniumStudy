@@ -2,10 +2,12 @@ package selenium;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
@@ -23,17 +25,13 @@ public class Button_Radio_Textbox_Excersice {
     String osName = System.getProperty("os.name");
     String username = "admin";
     String password = "admin";
+    Keys keys;
 
     @BeforeClass
     public void beforeClass() {
-        if (osName.contains("Windows")) {
-            System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
-        } else {
-            System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
-        }
-
+       keys= osName.contains("Windows") ? Keys.CONTROL:Keys.COMMAND;
         driver = new ChromeDriver();
-        explicitWait = new WebDriverWait(driver, 10);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
@@ -162,11 +160,6 @@ public class Button_Radio_Textbox_Excersice {
 
     @Test
     public void TC_06_Authentiaction_Alert_II() throws IOException {
-        if (driver.toString().contains("firefox")) {
-            Runtime.getRuntime().exec(new String[] { authenFirefox, username, password });
-        } else if (driver.toString().contains("chrome")) {
-            Runtime.getRuntime().exec(new String[] { authenChrome, username, password });
-        }
 
         driver.get("http://the-internet.herokuapp.com/basic_auth");
     }
