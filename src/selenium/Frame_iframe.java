@@ -54,6 +54,21 @@ public class Frame_iframe {
                 ,"Username and password are both required.");
 
     }
+    @Test public void Tc_02_HDFCBankiframe() {
+        driver.get("https://netbanking.hdfcbank.com/netbanking/");
+        sleepInSecond(5);
+        WebElement HDFCframe = driver.findElement(By.cssSelector("frame[name='login_page']"));
+        sleepInSecond(5);
+        driver.switchTo().frame(HDFCframe);
+        sleepInSecond(3);
+        driver.findElement(By.cssSelector("input.form-control")).sendKeys("AutomationFC");
+        driver.findElement(By.cssSelector("a.btn-primary")).click();
+        sleepInSecond(5);
+        driver.switchTo().defaultContent();
+        driver.findElement(By.cssSelector("input#keyboard")).sendKeys("123456789@");
+        sleepInSecond(5);
+        driver.findElement(By.cssSelector("a#loginBtn")).click();
+    }
 
     public void sleepInSecond(long timeInSecond) {
         try {
