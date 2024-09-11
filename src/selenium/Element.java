@@ -30,7 +30,7 @@ public class Element {
     public void BeforeClass(){
         System.out.println(System.getProperty("os.name"));
         System.out.println(System.getProperty("user.dir"));
-        if (osName.contains("Window")){ System.setProperty("webdriver.gecko.driver", projectPath + "\\browerDriver\\geckodriver.exe");}
+        if (osName.contains("Window")){ System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDriver\\geckodriver.exe");}
         else System.setProperty("webdriver.gecko.driver", projectPath + "/browerDriver/geckodriver");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
